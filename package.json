@@ -1,0 +1,22 @@
+{
+  "name": "@locketwan/dash",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Locketwan Monoservices Monorepo",
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "pnpm --parallel --filter \"./apps/*\" dev",
+    "dev:main": "pnpm --filter @locketwan/main dev"
+  },
+  "keywords": [
+    "locket",
+    "locketwan",
+    "monorepo",
+    "pnpm",
+    "microservices"
+  ],
+  "author": "wan",
+  "license": "ISC"
+}
