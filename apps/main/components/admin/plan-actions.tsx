@@ -69,7 +69,7 @@ export function CreatePlanButton() {
               </div>
               <div className="space-y-2">
                 <Label>Chu Kỳ (VD: lifetime)</Label>
-                <Input required value={form.billing_cycle} onChange={e => setForm({...form, billing_cycle: e.target.value})} />
+                <Input required value={form.billing_cycle} onChange={e => setForm({...form, billing_cycle: e.target.value as any})} />
               </div>
             </div>
             <DialogFooter>
@@ -144,7 +144,7 @@ export function PlanActions({ plan }: { plan: Plan }) {
               </div>
               <div className="space-y-2">
                 <Label>Chu Kỳ (VD: lifetime, month)</Label>
-                <Input required value={form.billing_cycle} onChange={e => setForm({...form, billing_cycle: e.target.value})} />
+                <Input required value={form.billing_cycle} onChange={e => setForm({...form, billing_cycle: e.target.value as any})} />
               </div>
             </div>
             <div className="flex items-center gap-2 mt-4">
