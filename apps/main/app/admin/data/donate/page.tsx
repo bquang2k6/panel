@@ -109,7 +109,7 @@ export default function DonatePage() {
     <>
       <div className="flex flex-col gap-8">
         <PageHeader
-          title="Quản lý Donate (locketdio_donate)"
+          title="Quản lý Donate (locketwan_donate)"
           description="Quản lý lịch sử ủng hộ donate và thông điệp của nhà tài trợ."
         />
 

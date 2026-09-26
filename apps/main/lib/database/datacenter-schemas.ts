@@ -21,18 +21,18 @@ CREATE TABLE IF NOT EXISTS public.database_connections (
 ALTER TABLE public.database_connections ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Allow authenticated admin full access" ON public.database_connections FOR ALL TO authenticated USING (true);
 
--- 2. BẢNG DANH MỤC OVERLAY SECTIONS (locketdio_overlay_sections)
-CREATE TABLE IF NOT EXISTS public.locketdio_overlay_sections (
+-- 2. BẢNG DANH MỤC OVERLAY SECTIONS (locketwan_overlay_sections)
+CREATE TABLE IF NOT EXISTS public.locketwan_overlay_sections (
   id text NOT NULL,
   name text NOT NULL,
   order_id integer NULL DEFAULT 0,
   active boolean NULL DEFAULT true,
   badge text NULL,
-  CONSTRAINT locketdio_overlay_sections_pkey PRIMARY KEY (id)
+  CONSTRAINT locketwan_overlay_sections_pkey PRIMARY KEY (id)
 ) TABLESPACE pg_default;
 
--- 3. BẢNG OVERLAY STUDIO (locketdio_overlays)
-CREATE TABLE IF NOT EXISTS public.locketdio_overlays (
+-- 3. BẢNG OVERLAY STUDIO (locketwan_overlays)
+CREATE TABLE IF NOT EXISTS public.locketwan_overlays (
   uid uuid NOT NULL DEFAULT gen_random_uuid (),
   section_id text NULL,
   overlay_id text NOT NULL,
@@ -51,30 +51,30 @@ CREATE TABLE IF NOT EXISTS public.locketdio_overlays (
   updated_at timestamp with time zone NULL DEFAULT now(),
   effect text NULL,
   is_editable boolean NOT NULL DEFAULT false,
-  CONSTRAINT locketdio_overlays_pkey PRIMARY KEY (uid),
-  CONSTRAINT locketdio_overlays_section_id_fkey FOREIGN KEY (section_id) REFERENCES locketdio_overlay_sections (id) ON DELETE CASCADE,
-  CONSTRAINT locketdio_overlays_source_check CHECK ((source = ANY (ARRAY['local'::text, 'remote'::text])))
+  CONSTRAINT locketwan_overlays_pkey PRIMARY KEY (uid),
+  CONSTRAINT locketwan_overlays_section_id_fkey FOREIGN KEY (section_id) REFERENCES locketwan_overlay_sections (id) ON DELETE CASCADE,
+  CONSTRAINT locketwan_overlays_source_check CHECK ((source = ANY (ARRAY['local'::text, 'remote'::text])))
 ) TABLESPACE pg_default;
 
--- 4. BẢNG QUẢN LÝ DONATE (locketdio_donate)
-CREATE TABLE IF NOT EXISTS public.locketdio_donate (
+-- 4. BẢNG QUẢN LÝ DONATE (locketwan_donate)
+CREATE TABLE IF NOT EXISTS public.locketwan_donate (
   id uuid NOT NULL DEFAULT gen_random_uuid (),
   donorname text NOT NULL,
   amount numeric NOT NULL,
   date timestamp without time zone NOT NULL,
   message text NULL,
   created_at timestamp with time zone NULL DEFAULT now(),
-  CONSTRAINT locketdio_donate_pkey PRIMARY KEY (id)
+  CONSTRAINT locketwan_donate_pkey PRIMARY KEY (id)
 ) TABLESPACE pg_default;
 
--- 5. BẢNG THÔNG BÁO HỆ THỐNG (locketdio_notifications)
-CREATE TABLE IF NOT EXISTS public.locketdio_notifications (
+-- 5. BẢNG THÔNG BÁO HỆ THỐNG (locketwan_notifications)
+CREATE TABLE IF NOT EXISTS public.locketwan_notifications (
   id uuid NOT NULL DEFAULT gen_random_uuid (),
   title text NULL,
   message text NOT NULL,
   pinned boolean NULL DEFAULT false,
   created_at timestamp with time zone NULL DEFAULT now(),
-  CONSTRAINT locketdio_notis_pkey PRIMARY KEY (id)
+  CONSTRAINT locketwan_notis_pkey PRIMARY KEY (id)
 ) TABLESPACE pg_default;
 
 -- 6. BẢNG CELEBRATE / TIMELINE LIST (celebrate_list)
@@ -121,23 +121,23 @@ ALTER TABLE public.database_connections ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Allow public full access database_connections" ON public.database_connections FOR ALL USING (true) WITH CHECK (true);`,
   },
   {
-    id: "locketdio_overlay_sections",
-    name: "2. locketdio_overlay_sections (Danh mục Overlay)",
-    tableName: "locketdio_overlay_sections",
-    sql: `CREATE TABLE IF NOT EXISTS public.locketdio_overlay_sections (
+    id: "locketwan_overlay_sections",
+    name: "2. locketwan_overlay_sections (Danh mục Overlay)",
+    tableName: "locketwan_overlay_sections",
+    sql: `CREATE TABLE IF NOT EXISTS public.locketwan_overlay_sections (
   id text NOT NULL,
   name text NOT NULL,
   order_id integer NULL DEFAULT 0,
   active boolean NULL DEFAULT true,
   badge text NULL,
-  CONSTRAINT locketdio_overlay_sections_pkey PRIMARY KEY (id)
+  CONSTRAINT locketwan_overlay_sections_pkey PRIMARY KEY (id)
 ) TABLESPACE pg_default;`,
   },
   {
-    id: "locketdio_overlays",
-    name: "3. locketdio_overlays (Overlay Studio)",
-    tableName: "locketdio_overlays",
-    sql: `CREATE TABLE IF NOT EXISTS public.locketdio_overlays (
+    id: "locketwan_overlays",
+    name: "3. locketwan_overlays (Overlay Studio)",
+    tableName: "locketwan_overlays",
+    sql: `CREATE TABLE IF NOT EXISTS public.locketwan_overlays (
   uid uuid NOT NULL DEFAULT gen_random_uuid (),
   section_id text NULL,
   overlay_id text NOT NULL,
@@ -156,36 +156,36 @@ CREATE POLICY "Allow public full access database_connections" ON public.database
   updated_at timestamp with time zone NULL DEFAULT now(),
   effect text NULL,
   is_editable boolean NOT NULL DEFAULT false,
-  CONSTRAINT locketdio_overlays_pkey PRIMARY KEY (uid),
-  CONSTRAINT locketdio_overlays_section_id_fkey FOREIGN KEY (section_id) REFERENCES locketdio_overlay_sections (id) ON DELETE CASCADE,
-  CONSTRAINT locketdio_overlays_source_check CHECK ((source = ANY (ARRAY['local'::text, 'remote'::text])))
+  CONSTRAINT locketwan_overlays_pkey PRIMARY KEY (uid),
+  CONSTRAINT locketwan_overlays_section_id_fkey FOREIGN KEY (section_id) REFERENCES locketwan_overlay_sections (id) ON DELETE CASCADE,
+  CONSTRAINT locketwan_overlays_source_check CHECK ((source = ANY (ARRAY['local'::text, 'remote'::text])))
 ) TABLESPACE pg_default;`,
   },
   {
-    id: "locketdio_donate",
-    name: "4. locketdio_donate (Quản lý Donate)",
-    tableName: "locketdio_donate",
-    sql: `CREATE TABLE IF NOT EXISTS public.locketdio_donate (
+    id: "locketwan_donate",
+    name: "4. locketwan_donate (Quản lý Donate)",
+    tableName: "locketwan_donate",
+    sql: `CREATE TABLE IF NOT EXISTS public.locketwan_donate (
   id uuid NOT NULL DEFAULT gen_random_uuid (),
   donorname text NOT NULL,
   amount numeric NOT NULL,
   date timestamp without time zone NOT NULL,
   message text NULL,
   created_at timestamp with time zone NULL DEFAULT now(),
-  CONSTRAINT locketdio_donate_pkey PRIMARY KEY (id)
+  CONSTRAINT locketwan_donate_pkey PRIMARY KEY (id)
 ) TABLESPACE pg_default;`,
   },
   {
-    id: "locketdio_notifications",
-    name: "5. locketdio_notifications (Thông báo)",
-    tableName: "locketdio_notifications",
-    sql: `CREATE TABLE IF NOT EXISTS public.locketdio_notifications (
+    id: "locketwan_notifications",
+    name: "5. locketwan_notifications (Thông báo)",
+    tableName: "locketwan_notifications",
+    sql: `CREATE TABLE IF NOT EXISTS public.locketwan_notifications (
   id uuid NOT NULL DEFAULT gen_random_uuid (),
   title text NULL,
   message text NOT NULL,
   pinned boolean NULL DEFAULT false,
   created_at timestamp with time zone NULL DEFAULT now(),
-  CONSTRAINT locketdio_notis_pkey PRIMARY KEY (id)
+  CONSTRAINT locketwan_notis_pkey PRIMARY KEY (id)
 ) TABLESPACE pg_default;`,
   },
   {

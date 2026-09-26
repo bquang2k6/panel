@@ -1,4 +1,4 @@
-// --- DONATE (locketdio_donate) ---
+// --- DONATE (locketwan_donate) ---
 export interface Donation {
   id: string | number;
   donorname: string;
@@ -15,7 +15,7 @@ export interface DonationPayload {
   message: string;
 }
 
-// --- THÔNG BÁO (locketdio_notifications) ---
+// --- THÔNG BÁO (locketwan_notifications) ---
 export interface NotificationItem {
   id: string;
   title: string | null;
@@ -51,7 +51,7 @@ export interface CelebratePayload {
   country_code: string;
 }
 
-// --- OVERLAY SECTIONS (locketdio_overlay_sections) ---
+// --- OVERLAY SECTIONS (locketwan_overlay_sections) ---
 export interface OverlaySection {
   id: string;
   name: string;
@@ -77,7 +77,7 @@ export type OverlayBackground = Record<string, any>;
 export type OverlayIconType = "emoji" | "image" | "none" | string;
 export type OverlayIcon = Record<string, any>;
 
-// --- OVERLAY STUDIO (locketdio_overlays) ---
+// --- OVERLAY STUwan (locketwan_overlays) ---
 export interface OverlayItem {
   uid: string;
   section_id: string | null;

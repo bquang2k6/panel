@@ -88,7 +88,7 @@ const STATIC_DATE_1 = "2026-09-01T12:00:00.000Z";
 const STATIC_DATE_2 = "2026-09-02T12:00:00.000Z";
 
 // -------------------------------------------------------------
-// 1. DONATE ACTIONS (locketdio_donate)
+// 1. DONATE ACTIONS (locketwan_donate)
 // -------------------------------------------------------------
 const initialDonations: Donation[] = [
   {
@@ -96,7 +96,7 @@ const initialDonations: Donation[] = [
     donorname: "Nguyễn Văn A",
     amount: 100000,
     date: STATIC_DATE_1,
-    message: "Cảm ơn LocketDio Pro rất nhiều!",
+    message: "Cảm ơn locketwan Pro rất nhiều!",
     created_at: STATIC_DATE_1,
   },
   {
@@ -115,7 +115,7 @@ export const donationActions = {
     if (client) {
       try {
         const { data, error } = await client
-          .from("locketdio_donate")
+          .from("locketwan_donate")
           .select("*")
           .order("date", { ascending: false });
 
@@ -124,7 +124,7 @@ export const donationActions = {
           return data as Donation[];
         }
       } catch (e) {
-        console.warn("Lỗi đọc locketdio_donate từ Supabase active:", e);
+        console.warn("Lỗi đọc locketwan_donate từ Supabase active:", e);
       }
     }
     return getStoredItems(DONATE_STORAGE_KEY, initialDonations);
@@ -137,7 +137,7 @@ export const donationActions = {
     if (client) {
       try {
         const { data: created, error } = await client
-          .from("locketdio_donate")
+          .from("locketwan_donate")
           .insert([
             {
               donorname: data.donorname,
@@ -153,7 +153,7 @@ export const donationActions = {
           newItem = created as Donation;
         }
       } catch (e) {
-        console.warn("Lỗi thêm locketdio_donate vào Supabase active:", e);
+        console.warn("Lỗi thêm locketwan_donate vào Supabase active:", e);
       }
     }
 
@@ -181,7 +181,7 @@ export const donationActions = {
     if (client) {
       try {
         const { data: updated, error } = await client
-          .from("locketdio_donate")
+          .from("locketwan_donate")
           .update({
             donorname: data.donorname,
             amount: Number(data.amount) || 0,
@@ -196,7 +196,7 @@ export const donationActions = {
           updatedItem = updated as Donation;
         }
       } catch (e) {
-        console.warn("Lỗi sửa locketdio_donate trên Supabase active:", e);
+        console.warn("Lỗi sửa locketwan_donate trên Supabase active:", e);
       }
     }
 
@@ -223,9 +223,9 @@ export const donationActions = {
     const client = await getDatacenterSupabaseClient();
     if (client) {
       try {
-        await client.from("locketdio_donate").delete().eq("id", id);
+        await client.from("locketwan_donate").delete().eq("id", id);
       } catch (e) {
-        console.warn("Lỗi xóa locketdio_donate trên Supabase active:", e);
+        console.warn("Lỗi xóa locketwan_donate trên Supabase active:", e);
       }
     }
 
@@ -236,13 +236,13 @@ export const donationActions = {
 };
 
 // -------------------------------------------------------------
-// 2. NOTIFICATION ACTIONS (locketdio_notifications)
+// 2. NOTIFICATION ACTIONS (locketwan_notifications)
 // -------------------------------------------------------------
 const initialNotifications: NotificationItem[] = [
   {
     id: "1",
     title: "Thông báo cập nhật hệ thống",
-    message: "Hệ thống LocketDio Pro nâng cấp phiên bản 1.2.0 với nhiều tính năng mới.",
+    message: "Hệ thống locketwan Pro nâng cấp phiên bản 1.2.0 với nhiều tính năng mới.",
     pinned: true,
     created_at: STATIC_DATE_1,
   },
@@ -261,7 +261,7 @@ export const notificationActions = {
     if (client) {
       try {
         const { data, error } = await client
-          .from("locketdio_notifications")
+          .from("locketwan_notifications")
           .select("*")
           .order("created_at", { ascending: false });
 
@@ -270,7 +270,7 @@ export const notificationActions = {
           return data as NotificationItem[];
         }
       } catch (e) {
-        console.warn("Lỗi đọc locketdio_notifications từ Supabase active:", e);
+        console.warn("Lỗi đọc locketwan_notifications từ Supabase active:", e);
       }
     }
     return getStoredItems(NOTIFICATION_STORAGE_KEY, initialNotifications);
@@ -283,7 +283,7 @@ export const notificationActions = {
     if (client) {
       try {
         const { data: created, error } = await client
-          .from("locketdio_notifications")
+          .from("locketwan_notifications")
           .insert([
             {
               title: data.title || null,
@@ -298,7 +298,7 @@ export const notificationActions = {
           newItem = created as NotificationItem;
         }
       } catch (e) {
-        console.warn("Lỗi thêm locketdio_notifications:", e);
+        console.warn("Lỗi thêm locketwan_notifications:", e);
       }
     }
 
@@ -325,7 +325,7 @@ export const notificationActions = {
     if (client) {
       try {
         const { data: updated, error } = await client
-          .from("locketdio_notifications")
+          .from("locketwan_notifications")
           .update({
             title: data.title || null,
             message: data.message,
@@ -371,7 +371,7 @@ export const notificationActions = {
     const client = await getDatacenterSupabaseClient();
     if (client) {
       try {
-        await client.from("locketdio_notifications").delete().eq("id", id);
+        await client.from("locketwan_notifications").delete().eq("id", id);
       } catch (e) {
         console.warn("Lỗi xóa notification:", e);
       }
@@ -392,7 +392,7 @@ const initialCelebrates: CelebrateItem[] = [
     uid: "usr_10293",
     username: "daovandoi",
     active: true,
-    note: "Sự kiện kỷ niệm LocketDio Pro VIP",
+    note: "Sự kiện kỷ niệm locketwan Pro VIP",
     token: "tok_abc123xyz",
     country_code: "VN",
     created_at: STATIC_DATE_1,
@@ -560,7 +560,7 @@ export const celebrateActions = {
 };
 
 // -------------------------------------------------------------
-// 4. OVERLAY STUDIO ACTIONS (locketdio_overlays)
+// 4. OVERLAY STUDIO ACTIONS (locketwan_overlays)
 // -------------------------------------------------------------
 const initialOverlays: OverlayItem[] = [
   {
@@ -615,7 +615,7 @@ export const overlayActions = {
     if (client) {
       try {
         const { data, error } = await client
-          .from("locketdio_overlays")
+          .from("locketwan_overlays")
           .select("*")
           .order("order_id", { ascending: true });
 
@@ -624,7 +624,7 @@ export const overlayActions = {
           return data as OverlayItem[];
         }
       } catch (e) {
-        console.warn("Lỗi đọc locketdio_overlays:", e);
+        console.warn("Lỗi đọc locketwan_overlays:", e);
       }
     }
     return getStoredItems(OVERLAY_STORAGE_KEY, initialOverlays);
@@ -637,7 +637,7 @@ export const overlayActions = {
     if (client) {
       try {
         const { data: created, error } = await client
-          .from("locketdio_overlays")
+          .from("locketwan_overlays")
           .insert([{
             section_id: data.section_id || null,
             overlay_id: data.overlay_id,
@@ -663,10 +663,10 @@ export const overlayActions = {
         if (!error && created) {
           newItem = created as OverlayItem;
         } else if (error) {
-          console.warn("Lỗi thêm locketdio_overlays:", error.message);
+          console.warn("Lỗi thêm locketwan_overlays:", error.message);
         }
       } catch (e) {
-        console.warn("Lỗi thêm locketdio_overlays:", e);
+        console.warn("Lỗi thêm locketwan_overlays:", e);
       }
     }
 
@@ -708,7 +708,7 @@ export const overlayActions = {
     if (client) {
       try {
         const { data: updated, error } = await client
-          .from("locketdio_overlays")
+          .from("locketwan_overlays")
           .update({
             section_id: data.section_id || null,
             overlay_id: data.overlay_id,
@@ -736,10 +736,10 @@ export const overlayActions = {
         if (!error && updated) {
           updatedItem = updated as OverlayItem;
         } else if (error) {
-          console.warn("Lỗi sửa locketdio_overlays:", error.message);
+          console.warn("Lỗi sửa locketwan_overlays:", error.message);
         }
       } catch (e) {
-        console.warn("Lỗi sửa locketdio_overlays:", e);
+        console.warn("Lỗi sửa locketwan_overlays:", e);
       }
     }
 
@@ -807,9 +807,9 @@ export const overlayActions = {
     const client = await getDatacenterSupabaseClient();
     if (client) {
       try {
-        await client.from("locketdio_overlays").delete().eq("uid", uid);
+        await client.from("locketwan_overlays").delete().eq("uid", uid);
       } catch (e) {
-        console.warn("Lỗi xóa locketdio_overlays:", e);
+        console.warn("Lỗi xóa locketwan_overlays:", e);
       }
     }
 
@@ -820,7 +820,7 @@ export const overlayActions = {
 };
 
 // -------------------------------------------------------------
-// 5. OVERLAY SECTIONS ACTIONS (locketdio_overlay_sections)
+// 5. OVERLAY SECTIONS ACTIONS (locketwan_overlay_sections)
 // -------------------------------------------------------------
 const SECTION_STORAGE_KEY = "locket_datacenter_overlay_sections";
 
@@ -832,7 +832,7 @@ export const sectionActions = {
     if (client) {
       try {
         const { data, error } = await client
-          .from("locketdio_overlay_sections")
+          .from("locketwan_overlay_sections")
           .select("*")
           .order("order_id", { ascending: true });
 
@@ -841,7 +841,7 @@ export const sectionActions = {
           return data as OverlaySection[];
         }
       } catch (e) {
-        console.warn("Lỗi đọc locketdio_overlay_sections:", e);
+        console.warn("Lỗi đọc locketwan_overlay_sections:", e);
       }
     }
     return getStoredItems(SECTION_STORAGE_KEY, initialSections);
@@ -854,7 +854,7 @@ export const sectionActions = {
     if (client) {
       try {
         const { data: created, error } = await client
-          .from("locketdio_overlay_sections")
+          .from("locketwan_overlay_sections")
           .insert([{
             id: data.id,
             name: data.name,
@@ -898,7 +898,7 @@ export const sectionActions = {
     if (client) {
       try {
         const { data: updated, error } = await client
-          .from("locketdio_overlay_sections")
+          .from("locketwan_overlay_sections")
           .update({
             name: data.name,
             order_id: Number(data.order_id) || 0,
@@ -940,7 +940,7 @@ export const sectionActions = {
     const client = await getDatacenterSupabaseClient();
     if (client) {
       try {
-        await client.from("locketdio_overlay_sections").delete().eq("id", id);
+        await client.from("locketwan_overlay_sections").delete().eq("id", id);
       } catch (e) {
         console.warn("Lỗi xóa section:", e);
       }

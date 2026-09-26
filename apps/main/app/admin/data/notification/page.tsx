@@ -85,7 +85,7 @@ export default function NotificationsPage() {
     <>
       <div className="flex flex-col gap-8">
         <PageHeader
-          title="Quản lý Thông báo (locketdio_notifications)"
+          title="Quản lý Thông báo (locketwan_notifications)"
           description="Quản lý tin nhắn thông báo hệ thống và các tin ghim (pinned)."
         />
 

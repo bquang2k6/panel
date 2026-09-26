@@ -4,10 +4,10 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL:-https://supabase.locket-dio.com}
+        NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL:-https://supabase.locket-wan.com}
         NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ${NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY}
-        NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:-https://dash.locket-dio.com}
-    container_name: dash-locketdio
+        NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:-https://dash.locket-wan.com}
+    container_name: dash-locketwan
     restart: unless-stopped
     ports:
       - "3000:3000"
