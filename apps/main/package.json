@@ -21,8 +21,8 @@
     "@tanstack/react-table": "^8.21.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "csv-writer": "^1.6.0",
     "cn": "^0.2.5",
+    "csv-writer": "^1.6.0",
     "lucide-react": "^0.511.0",
     "mongoose": "^9.10.2",
     "next": "16.2.4",
@@ -35,6 +35,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@netlify/plugin-nextjs": "^5.16.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
